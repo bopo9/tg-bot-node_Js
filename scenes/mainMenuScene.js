@@ -5,12 +5,13 @@ const {
     Stage,
     Markup,
     Extra,
-    Scenes,
     Composer} = require('telegraf');
+
+const Scene  = require('telegraf/scenes/base');
 
 const I18n = require('telegraf-i18n');
 const path = require("path");
-const { enter, leave } = Scenes.Stage;
+const { enter, leave } = Stage;
 
 const i18n = new I18n({
     directory: path.resolve(__dirname, '../locales'),
@@ -18,20 +19,15 @@ const i18n = new I18n({
     useSession: true,
 });
 
-const languageSelect = Markup.keyboard([['🇷🇺 - Начать', '🇺🇦 - Почати', '🇺🇸 - Start']]);
+const mainMenu = new Scene('mainMenu');
 
-const setLanguage = new Scenes.BaseScene('setLanguage');
+mainMenu.use(i18n.middleware());
 
-setLanguage.enter(ctx => {
-    return ctx.reply('Выбери язык:', languageSelect.oneTime().resize());
+mainMenu.enter((ctx) => {
+    ctx.reply('Hello from main menu')
 })
-
-setLanguage.use(i18n.middleware());
-setLanguage.use(session());
-
-
 
 
 module.exports = {
-    setLanguage,
+    mainMenu
 }
