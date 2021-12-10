@@ -11,7 +11,7 @@ const {Extra} = require("telegraf");
 const {MongoClient} = require('mongodb');
 const {languageSelect} = require('./utils/keyboards');
 
-const bot = new Telegraf('1707078555:AAH6z7unPmnWZ6C41bsBIhWbzG83Vsrth64');
+const bot = new Telegraf(process.env.BOT_TOKEN');
 
 const {checkUserReg,createUser} = require('./dataBase/db')
 
